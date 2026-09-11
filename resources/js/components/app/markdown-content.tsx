@@ -23,7 +23,7 @@ function CodeBlock({ children }: { children: string }) {
 
     return (
         <div className="group relative">
-            <pre className="overflow-x-auto rounded-md bg-muted p-4 text-sm">
+            <pre className="overflow-x-auto rounded-md bg-(--brand-indigo-950) p-4 font-mono text-sm text-white/90">
                 <code>{children}</code>
             </pre>
             <Button
@@ -61,7 +61,7 @@ export function extractHeadings(markdown: string): Heading[] {
 
 export function MarkdownContent({ markdown }: { markdown: string }) {
     return (
-        <div className="prose prose-neutral max-w-none dark:prose-invert">
+        <div className="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -73,7 +73,7 @@ export function MarkdownContent({ markdown }: { markdown: string }) {
                         const text = String(children).replace(/\n$/, '');
 
                         if (!isBlock && !text.includes('\n')) {
-                            return <code className="rounded bg-muted px-1 py-0.5 text-sm">{text}</code>;
+                            return <code className="rounded bg-muted px-1 py-0.5 font-mono text-sm text-foreground">{text}</code>;
                         }
 
                         return <CodeBlock>{text}</CodeBlock>;

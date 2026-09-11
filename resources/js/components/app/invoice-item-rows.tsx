@@ -64,8 +64,8 @@ export function InvoiceItemRows({ items, onChange, defaultMonth }: Props) {
                 <Plus className="mr-2 h-4 w-4" />
                 Tambah Baris
             </Button>
-            <div className="flex justify-end border-t pt-3 text-right">
-                <span className="font-semibold">Total: {formatRupiah(total)}</span>
+            <div className="flex justify-end border-t border-border pt-3 text-right">
+                <span className="font-mono text-base font-semibold text-foreground">Total: Rp {formatRupiah(total)}</span>
             </div>
         </div>
     );

@@ -14,7 +14,7 @@ class AdminUserSeeder extends Seeder
             ['email' => 'admin@pullstack.cloud'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('ubah-password-ini'),
+                'password' => Hash::make('password'),
                 'role' => 'admin',
                 'is_active' => true,
             ]

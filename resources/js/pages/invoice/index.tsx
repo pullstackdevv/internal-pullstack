@@ -42,7 +42,7 @@ export default function InvoicesIndex({ invoices }: { invoices: InvoiceRow[] }) 
                             <TableCell className="font-mono text-sm">{invoice.number}</TableCell>
                             <TableCell>{invoice.client_name}</TableCell>
                             <TableCell>{formatIndonesianDate(invoice.issue_date)}</TableCell>
-                            <TableCell className="text-right">{formatRupiah(Number(invoice.total))}</TableCell>
+                            <TableCell className="text-right font-mono">{formatRupiah(Number(invoice.total))}</TableCell>
                             <TableCell className="space-x-2 text-right">
                                 <Button variant="outline" size="sm" asChild>
                                     <a href={`/invoices/${invoice.id}/pdf`} target="_blank" rel="noreferrer">
