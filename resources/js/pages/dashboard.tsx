@@ -1,3 +1,10 @@
+import { AppLayout } from '@/layouts/app-layout';
+import { PageHeader } from '@/components/app/page-header';
+
 export default function Dashboard() {
-    return <div className="p-6">Dashboard</div>;
+    return (
+        <AppLayout>
+            <PageHeader title="Dashboard" />
+        </AppLayout>
+    );
 }
