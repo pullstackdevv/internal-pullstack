@@ -26,6 +26,7 @@ class InvoicePdfController extends Controller
         ))->build();
 
         $qrDataUri = 'data:image/png;base64,'.base64_encode($qrResult->getString());
+        $logoDataUri = 'data:image/png;base64,'.base64_encode(file_get_contents(public_path('pullstack.png')));
 
         $pdf = Pdf::loadView('pdf.invoice', [
             'invoice' => $invoice,
@@ -36,6 +37,7 @@ class InvoicePdfController extends Controller
                 'account_name' => '', 'bank' => '', 'account_number' => '',
             ]),
             'qrDataUri' => $qrDataUri,
+            'logoDataUri' => $logoDataUri,
         ]);
 
         $filename = str_replace('/', '-', $invoice->number).'.pdf';

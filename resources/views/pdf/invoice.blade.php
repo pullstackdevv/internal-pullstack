@@ -5,7 +5,8 @@
     <style>
         body { font-family: 'Helvetica', sans-serif; font-size: 12px; color: #1a1a1a; }
         .header { display: table; width: 100%; border-bottom: 2px solid #1e3a8a; padding-bottom: 12px; margin-bottom: 20px; }
-        .header .brand { display: table-cell; vertical-align: top; font-size: 20px; font-weight: bold; }
+        .header .brand { display: table-cell; vertical-align: top; }
+        .header .brand img { height: 40px; }
         .header .issuer { display: table-cell; text-align: right; vertical-align: top; }
         .issuer p { margin: 2px 0; color: #444; }
         h1.title { font-size: 28px; margin: 0 0 16px 0; }
@@ -24,7 +25,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="brand">{{ $issuer['name'] }}</div>
+        <div class="brand"><img src="{{ $logoDataUri }}" alt="{{ $issuer['name'] }}"></div>
         <div class="issuer">
             <p>{{ $issuer['address'] }}</p>
             <p>No : {{ $issuer['phone'] }}</p>
