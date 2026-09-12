@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <style>
         body { font-family: 'Helvetica', sans-serif; font-size: 12px; color: #1a1a1a; }
-        .header { display: table; width: 100%; border-bottom: 2px solid #1e3a8a; padding-bottom: 12px; margin-bottom: 20px; }
+        .header { display: table; width: 100%; border-bottom: 2px solid #1a1a1a; padding-bottom: 12px; margin-bottom: 20px; }
         .header .brand { display: table-cell; vertical-align: top; }
         .header .brand img { height: 40px; }
         .header .issuer { display: table-cell; text-align: right; vertical-align: top; }

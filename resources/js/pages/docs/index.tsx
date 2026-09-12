@@ -1,8 +1,9 @@
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
 import { Button } from '@/components/ui/button';
 import { StatusBadge } from '@/components/app/status-badge';
+import { RowActionsMenu } from '@/components/app/row-actions-menu';
 import { DocsNav, DocsNavGroup } from '@/components/docs/docs-nav';
 
 interface DocumentRow {
@@ -48,17 +49,28 @@ export default function DocumentsIndex({ documents, nav, canManage }: DocumentsI
                                 <h2 className="mb-2 text-sm font-semibold text-muted-foreground">{categoryName}</h2>
                                 <div className="space-y-2">
                                     {docs.map((doc) => (
-                                        <Link
+                                        <div
                                             key={doc.id}
-                                            href={`/docs/${doc.slug}`}
-                                            className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-muted/40"
+                                            className="flex items-center justify-between gap-3 rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-muted/40"
                                         >
-                                            <div>
-                                                <p className="font-medium">{doc.title}</p>
-                                                {doc.excerpt && <p className="text-sm text-muted-foreground">{doc.excerpt}</p>}
+                                            <Link href={`/docs/${doc.slug}`} className="min-w-0 flex-1">
+                                                <p className="truncate font-medium">{doc.title}</p>
+                                                {doc.excerpt && (
+                                                    <p className="truncate text-sm text-muted-foreground">{doc.excerpt}</p>
+                                                )}
+                                            </Link>
+                                            <div className="flex shrink-0 items-center gap-2">
+                                                {!doc.is_published && <StatusBadge tone="warning">Draft</StatusBadge>}
+                                                {canManage && (
+                                                    <RowActionsMenu
+                                                        editHref={`/docs-manage/${doc.id}/edit`}
+                                                        onConfirm={() => router.delete(`/docs/${doc.id}`)}
+                                                        confirmTitle={`Hapus ${doc.title}?`}
+                                                        confirmDescription="Tindakan ini tidak bisa dibatalkan."
+                                                    />
+                                                )}
                                             </div>
-                                            {!doc.is_published && <StatusBadge tone="warning">Draft</StatusBadge>}
-                                        </Link>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
