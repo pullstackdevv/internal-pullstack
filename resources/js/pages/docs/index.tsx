@@ -2,7 +2,7 @@ import { Link } from '@inertiajs/react';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { StatusBadge } from '@/components/app/status-badge';
 
 interface DocumentRow {
     id: number;
@@ -41,13 +41,13 @@ export default function DocumentsIndex({ documents, canManage }: { documents: Do
                                 <Link
                                     key={doc.id}
                                     href={`/docs/${doc.slug}`}
-                                    className="flex items-center justify-between rounded-md border p-3 hover:bg-muted"
+                                    className="flex items-center justify-between rounded-lg border border-border bg-card p-3 hover:bg-muted/50"
                                 >
                                     <div>
                                         <p className="font-medium">{doc.title}</p>
                                         {doc.excerpt && <p className="text-sm text-muted-foreground">{doc.excerpt}</p>}
                                     </div>
-                                    {!doc.is_published && <Badge variant="secondary">Draft</Badge>}
+                                    {!doc.is_published && <StatusBadge tone="warning">Draft</StatusBadge>}
                                 </Link>
                             ))}
                         </div>

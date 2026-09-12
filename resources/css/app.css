@@ -22,6 +22,8 @@
     --foreground: var(--brand-indigo-950);
     --card: #ffffff;
     --card-foreground: var(--brand-indigo-950);
+    --popover: #ffffff;
+    --popover-foreground: var(--brand-indigo-950);
     --primary: var(--brand-indigo-600);
     --primary-foreground: #ffffff;
     --secondary: #edecf7;
@@ -38,14 +40,14 @@
 
     --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
-    --sidebar: var(--brand-indigo-900);
-    --sidebar-foreground: rgba(255, 255, 255, 0.85);
-    --sidebar-primary: var(--brand-orange-500);
+    --sidebar: #ffffff;
+    --sidebar-foreground: #4b4b63;
+    --sidebar-primary: var(--brand-indigo-600);
     --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: rgba(255, 255, 255, 0.08);
-    --sidebar-accent-foreground: #ffffff;
-    --sidebar-border: rgba(255, 255, 255, 0.1);
-    --sidebar-ring: var(--brand-orange-500);
+    --sidebar-accent: var(--secondary);
+    --sidebar-accent-foreground: var(--brand-indigo-700);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--brand-indigo-600);
 }
 
 @theme inline {
@@ -53,6 +55,8 @@
     --color-foreground: var(--foreground);
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
     --color-secondary: var(--secondary);

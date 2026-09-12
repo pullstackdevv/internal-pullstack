@@ -3,7 +3,8 @@ import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
+import { StatusBadge } from '@/components/app/status-badge';
+import { RowActionsMenu } from '@/components/app/row-actions-menu';
 
 interface UserRow {
     id: number;
@@ -24,45 +25,42 @@ export default function UsersIndex({ users }: { users: UserRow[] }) {
                     </Button>
                 }
             />
-            <Table className="mt-4">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Nama</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Role</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead />
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {users.map((user) => (
-                        <TableRow key={user.id}>
-                            <TableCell>{user.name}</TableCell>
-                            <TableCell>{user.email}</TableCell>
-                            <TableCell className="capitalize">{user.role}</TableCell>
-                            <TableCell>
-                                <Badge variant={user.is_active ? 'default' : 'secondary'}>
-                                    {user.is_active ? 'Aktif' : 'Nonaktif'}
-                                </Badge>
-                            </TableCell>
-                            <TableCell className="space-x-2 text-right">
-                                <Button variant="outline" size="sm" asChild>
-                                    <Link href={`/users/${user.id}/edit`}>Edit</Link>
-                                </Button>
-                                {user.is_active && (
-                                    <Button
-                                        variant="destructive"
-                                        size="sm"
-                                        onClick={() => router.delete(`/users/${user.id}`)}
-                                    >
-                                        Nonaktifkan
-                                    </Button>
-                                )}
-                            </TableCell>
+            <div className="mt-4 rounded-lg border border-border bg-card">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Nama</TableHead>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Role</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead className="w-12" />
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {users.map((user) => (
+                            <TableRow key={user.id}>
+                                <TableCell className="font-medium">{user.name}</TableCell>
+                                <TableCell className="text-muted-foreground">{user.email}</TableCell>
+                                <TableCell className="capitalize">{user.role}</TableCell>
+                                <TableCell>
+                                    <StatusBadge tone={user.is_active ? 'success' : 'neutral'}>
+                                        {user.is_active ? 'Aktif' : 'Nonaktif'}
+                                    </StatusBadge>
+                                </TableCell>
+                                <TableCell>
+                                    <RowActionsMenu
+                                        editHref={`/users/${user.id}/edit`}
+                                        onConfirm={user.is_active ? () => router.delete(`/users/${user.id}`) : undefined}
+                                        confirmLabel="Nonaktifkan"
+                                        confirmTitle={`Nonaktifkan ${user.name}?`}
+                                        confirmDescription="User tidak bisa login lagi sampai diaktifkan ulang oleh admin."
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
         </AppLayout>
     );
 }
