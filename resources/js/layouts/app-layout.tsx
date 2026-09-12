@@ -2,6 +2,19 @@ import { PropsWithChildren } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
 import { LogOut, BookOpen, FileText, Users, Settings, LayoutDashboard, LucideIcon } from 'lucide-react';
 import type { SharedProps } from '@/types';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarHeader,
+    SidebarInset,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarProvider,
+    SidebarTrigger,
+} from '@/components/ui/sidebar';
 
 const ICONS: Record<string, LucideIcon> = {
     'book-open': BookOpen,
@@ -9,6 +22,8 @@ const ICONS: Record<string, LucideIcon> = {
     users: Users,
     settings: Settings,
 };
+
+const ACTIVE_RAIL = 'data-[active=true]:border-l-2 data-[active=true]:border-sidebar-primary';
 
 function initials(name: string): string {
     return name
@@ -25,67 +40,86 @@ export function AppLayout({ children }: PropsWithChildren) {
     const currentPath = page.url.split('?')[0];
 
     return (
-        <div className="flex min-h-screen bg-background">
-            <aside className="flex w-60 shrink-0 flex-col bg-(--brand-indigo-900) text-white">
-                <div className="flex items-center gap-2.5 px-5 py-6">
-                    <img src="/images/pullstack-mark.png" alt="" className="h-8 w-8 rounded-md object-cover" />
-                    <span className="text-[15px] font-semibold tracking-tight">Pullstack</span>
-                </div>
+        <SidebarProvider>
+            <Sidebar collapsible="icon">
+                <SidebarHeader>
+                    <div className="flex items-center gap-2.5 px-1 py-1">
+                        <img
+                            src="/images/pullstack-mark.png"
+                            alt=""
+                            className="h-7 w-7 shrink-0 rounded-md object-cover"
+                        />
+                        <span className="text-[15px] font-semibold tracking-tight text-sidebar-foreground group-data-[collapsible=icon]:hidden">
+                            Pullstack
+                        </span>
+                    </div>
+                </SidebarHeader>
 
-                <nav className="flex-1 space-y-0.5 px-3">
-                    <Link
-                        href="/dashboard"
-                        className={`flex items-center gap-2.5 rounded-md py-2 pl-3 pr-3 text-sm transition-colors ${
-                            currentPath === '/dashboard'
-                                ? 'border-l-2 border-(--brand-orange-500) bg-white/10 font-medium text-white'
-                                : 'border-l-2 border-transparent text-white/70 hover:bg-white/5 hover:text-white'
-                        }`}
-                    >
-                        <LayoutDashboard className="h-4 w-4" />
-                        Dashboard
-                    </Link>
+                <SidebarContent>
+                    <SidebarGroup>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton
+                                    asChild
+                                    isActive={currentPath === '/dashboard'}
+                                    tooltip="Dashboard"
+                                    className={ACTIVE_RAIL}
+                                >
+                                    <Link href="/dashboard">
+                                        <LayoutDashboard />
+                                        <span>Dashboard</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
 
-                    {auth.modules.map((module) => {
-                        const Icon = ICONS[module.icon] ?? FileText;
-                        const active = currentPath.startsWith(module.href);
+                            {auth.modules.map((module) => {
+                                const Icon = ICONS[module.icon] ?? FileText;
+                                const active = currentPath.startsWith(module.href);
 
-                        return (
-                            <Link
-                                key={module.key}
-                                href={module.href}
-                                className={`flex items-center gap-2.5 rounded-md py-2 pl-3 pr-3 text-sm transition-colors ${
-                                    active
-                                        ? 'border-l-2 border-(--brand-orange-500) bg-white/10 font-medium text-white'
-                                        : 'border-l-2 border-transparent text-white/70 hover:bg-white/5 hover:text-white'
-                                }`}
-                            >
-                                <Icon className="h-4 w-4" />
-                                {module.label}
-                            </Link>
-                        );
-                    })}
-                </nav>
+                                return (
+                                    <SidebarMenuItem key={module.key}>
+                                        <SidebarMenuButton
+                                            asChild
+                                            isActive={active}
+                                            tooltip={module.label}
+                                            className={ACTIVE_RAIL}
+                                        >
+                                            <Link href={module.href}>
+                                                <Icon />
+                                                <span>{module.label}</span>
+                                            </Link>
+                                        </SidebarMenuButton>
+                                    </SidebarMenuItem>
+                                );
+                            })}
+                        </SidebarMenu>
+                    </SidebarGroup>
+                </SidebarContent>
 
-                <div className="border-t border-white/10 px-3 py-3">
-                    <button
-                        onClick={() => router.post('/logout')}
-                        className="flex w-full items-center gap-2.5 rounded-md py-2 pl-3 pr-3 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
-                    >
-                        <LogOut className="h-4 w-4" />
-                        Keluar
-                    </button>
-                </div>
-            </aside>
+                <SidebarFooter>
+                    <SidebarMenu>
+                        <SidebarMenuItem>
+                            <SidebarMenuButton onClick={() => router.post('/logout')} tooltip="Keluar">
+                                <LogOut />
+                                <span>Keluar</span>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    </SidebarMenu>
+                </SidebarFooter>
+            </Sidebar>
 
-            <div className="flex flex-1 flex-col">
-                <header className="flex items-center justify-end gap-3 border-b border-border bg-card px-6 py-3">
-                    <span className="text-sm text-muted-foreground">{auth.user.email}</span>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-primary">
-                        {initials(auth.user.name)}
+            <SidebarInset>
+                <header className="flex items-center justify-between gap-3 border-b border-border bg-card px-4 py-3">
+                    <SidebarTrigger />
+                    <div className="flex items-center gap-3">
+                        <span className="text-sm text-muted-foreground">{auth.user.email}</span>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-primary">
+                            {initials(auth.user.name)}
+                        </div>
                     </div>
                 </header>
-                <main className="flex-1 px-8 py-7">{children}</main>
-            </div>
-        </div>
+                <div className="flex-1 px-8 py-7">{children}</div>
+            </SidebarInset>
+        </SidebarProvider>
     );
 }
