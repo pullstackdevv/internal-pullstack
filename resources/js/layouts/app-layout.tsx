@@ -3,6 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, FileText, Users, Settings, LayoutDashboard, LucideIcon } from 'lucide-react';
 import type { SharedProps } from '@/types';
 import { NavUser } from '@/components/app/nav-user';
+import { Toaster } from '@/components/ui/sonner';
 import {
     Sidebar,
     SidebarContent,
@@ -93,6 +94,7 @@ export function AppLayout({ children }: PropsWithChildren) {
                 </header>
                 <div className="flex-1 px-8 py-7">{children}</div>
             </SidebarInset>
+            <Toaster position="top-right" />
         </SidebarProvider>
     );
 }

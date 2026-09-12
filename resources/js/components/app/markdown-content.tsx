@@ -23,13 +23,13 @@ function CodeBlock({ children }: { children: string }) {
 
     return (
         <div className="group relative">
-            <pre className="overflow-x-auto rounded-md bg-(--brand-indigo-950) p-4 font-mono text-sm text-white/90">
+            <pre className="overflow-x-auto overflow-y-hidden rounded-md border border-border bg-muted p-4 font-mono text-sm leading-relaxed text-foreground">
                 <code>{children}</code>
             </pre>
             <Button
                 variant="secondary"
                 size="sm"
-                className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100"
+                className="absolute right-2 top-2 max-lg:opacity-100 lg:opacity-0 lg:transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
                 onClick={copy}
             >
                 {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}

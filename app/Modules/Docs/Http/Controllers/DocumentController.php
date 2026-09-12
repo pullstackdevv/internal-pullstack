@@ -9,6 +9,7 @@ use App\Modules\Docs\Models\DocCategory;
 use App\Modules\Docs\Models\Document;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -16,29 +17,57 @@ class DocumentController extends Controller
 {
     public function index(Request $request): Response
     {
-        $canManage = $request->user()->isAdmin() || $request->user()->levelFor('docs') === 'manage';
-
-        $documents = Document::with('category')
-            ->when(! $canManage, fn ($query) => $query->where('is_published', true))
-            ->orderBy('doc_category_id')
-            ->orderBy('position')
-            ->get();
+        $documents = $this->visibleDocuments($request);
 
         return Inertia::render('docs/index', [
             'documents' => $documents,
-            'canManage' => $canManage,
+            'nav' => $this->nav($documents),
+            'canManage' => $this->canManage($request),
         ]);
     }
 
     public function show(Request $request, string $slug): Response
     {
-        $canManage = $request->user()->isAdmin() || $request->user()->levelFor('docs') === 'manage';
+        $documents = $this->visibleDocuments($request);
+        $document = $documents->firstWhere('slug', $slug);
 
-        $document = Document::where('slug', $slug)
-            ->when(! $canManage, fn ($query) => $query->where('is_published', true))
-            ->firstOrFail();
+        abort_if($document === null, 404);
 
-        return Inertia::render('docs/show', ['document' => $document]);
+        return Inertia::render('docs/show', [
+            'document' => $document,
+            'nav' => $this->nav($documents),
+            'canManage' => $this->canManage($request),
+        ]);
+    }
+
+    private function canManage(Request $request): bool
+    {
+        return $request->user()->isAdmin() || $request->user()->levelFor('docs') === 'manage';
+    }
+
+    private function visibleDocuments(Request $request): Collection
+    {
+        return Document::with('category')
+            ->when(! $this->canManage($request), fn ($query) => $query->where('is_published', true))
+            ->orderBy('doc_category_id')
+            ->orderBy('position')
+            ->get();
+    }
+
+    private function nav(Collection $documents): array
+    {
+        return $documents
+            ->groupBy(fn (Document $document) => $document->category->name)
+            ->map(fn (Collection $docs) => [
+                'name' => $docs->first()->category->name,
+                'documents' => $docs->map(fn (Document $document) => [
+                    'id' => $document->id,
+                    'slug' => $document->slug,
+                    'title' => $document->title,
+                ])->values(),
+            ])
+            ->values()
+            ->all();
     }
 
     public function create(): Response
