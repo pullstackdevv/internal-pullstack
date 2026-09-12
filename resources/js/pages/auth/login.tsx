@@ -18,7 +18,7 @@ export default function Login() {
     return (
         <div className="flex min-h-screen">
             <div className="hidden w-1/2 flex-col justify-between bg-(--brand-indigo-900) p-12 text-white lg:flex">
-                <img src="/pullstack.png" alt="Pullstack Dev" className="h-10 w-auto" />
+                <img src="/pullstack.png" alt="Pullstack Dev" className="h-10 w-auto self-start object-contain" />
                 <div>
                     <p className="max-w-sm text-2xl font-medium leading-snug text-white/90">
                         Dokumentasi dan invoice internal, di satu tempat.
