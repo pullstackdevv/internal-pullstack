@@ -61,7 +61,7 @@ export function extractHeadings(markdown: string): Heading[] {
 
 export function MarkdownContent({ markdown }: { markdown: string }) {
     return (
-        <div className="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+        <div className="prose prose-neutral prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
