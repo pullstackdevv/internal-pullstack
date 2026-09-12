@@ -17,6 +17,10 @@
         table.items th { background: #e5e5e5; text-align: left; padding: 8px; font-size: 12px; }
         table.items th:last-child, table.items td:last-child { text-align: right; }
         table.items td { padding: 8px; border-bottom: 1px solid #eee; }
+        table.items td.description p { margin: 0 0 4px 0; }
+        table.items td.description p:last-child { margin-bottom: 0; }
+        table.items td.description ul, table.items td.description ol { margin: 4px 0; padding-left: 16px; }
+        table.items td.description li { margin-bottom: 2px; }
         .total-row td { background: #e5e5e5; font-weight: bold; padding: 10px 8px; }
         .payment { margin-top: 24px; border-top: 2px solid #1a1a1a; padding-top: 16px; }
         .payment p { margin: 2px 0; }
@@ -54,9 +58,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($invoice->items() as $item)
+            @foreach ($items as $item)
                 <tr>
-                    <td>{{ $item['description'] }}</td>
+                    <td class="description">{!! $item['description_html'] !!}</td>
                     <td>{{ $item['month'] ?: '-' }}</td>
                     <td>{{ number_format($item['amount'], 0, ',', '.') }}</td>
                 </tr>

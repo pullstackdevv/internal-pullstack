@@ -11,11 +11,19 @@ use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Http\Response;
+use League\CommonMark\CommonMarkConverter;
 
 class InvoicePdfController extends Controller
 {
     public function __invoke(Invoice $invoice, Settings $settings): Response
     {
+        $converter = new CommonMarkConverter(['html_input' => 'strip']);
+
+        $items = array_map(
+            fn (array $item) => [...$item, 'description_html' => (string) $converter->convert($item['description'])],
+            $invoice->items()
+        );
+
         $qrResult = (new Builder(
             writer: new PngWriter(),
             data: $invoice->number,
@@ -30,6 +38,7 @@ class InvoicePdfController extends Controller
 
         $pdf = Pdf::loadView('pdf.invoice', [
             'invoice' => $invoice,
+            'items' => $items,
             'issuer' => $settings->get('invoice.issuer', [
                 'name' => 'Pullstack Dev', 'address' => '', 'phone' => '', 'email' => '',
             ]),

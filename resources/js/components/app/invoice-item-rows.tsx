@@ -1,5 +1,9 @@
 import { Plus, Trash2 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { formatRupiah } from '@/lib/format';
 
@@ -13,6 +17,10 @@ interface Props {
     items: InvoiceItem[];
     onChange: (items: InvoiceItem[]) => void;
     defaultMonth: string;
+}
+
+function hasMarkdown(text: string): boolean {
+    return /^[-*]\s|^\d+\.\s|\*\*.+\*\*/m.test(text);
 }
 
 export function InvoiceItemRows({ items, onChange, defaultMonth }: Props) {
@@ -32,32 +40,54 @@ export function InvoiceItemRows({ items, onChange, defaultMonth }: Props) {
 
     return (
         <div className="space-y-3">
-            <div className="grid grid-cols-[1fr_140px_140px_40px] gap-2 text-sm font-medium text-muted-foreground">
-                <span>Job Description</span>
-                <span>Month</span>
-                <span>Subtotal</span>
-                <span />
-            </div>
+            <Label>Job Description</Label>
             {items.map((item, index) => (
-                <div key={index} className="grid grid-cols-[1fr_140px_140px_40px] items-center gap-2">
-                    <Input
-                        value={item.description}
-                        onChange={(e) => updateItem(index, { description: e.target.value })}
-                        placeholder="Deskripsi pekerjaan"
-                    />
-                    <Input
-                        value={item.month}
-                        onChange={(e) => updateItem(index, { month: e.target.value })}
-                        placeholder="-"
-                    />
-                    <Input
-                        type="number"
-                        value={item.amount}
-                        onChange={(e) => updateItem(index, { amount: Number(e.target.value) })}
-                    />
-                    <Button variant="ghost" size="icon" onClick={() => removeItem(index)}>
-                        <Trash2 className="h-4 w-4" />
-                    </Button>
+                <div key={index} className="rounded-lg border border-border bg-card p-3">
+                    <div className="flex items-start gap-2">
+                        <Textarea
+                            value={item.description}
+                            onChange={(e) => updateItem(index, { description: e.target.value })}
+                            placeholder={'Deskripsi pekerjaan — pakai "- " buat list, "**tebal**" buat penekanan'}
+                            rows={2}
+                            className="flex-1"
+                        />
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="shrink-0"
+                            onClick={() => removeItem(index)}
+                        >
+                            <Trash2 className="h-4 w-4" />
+                        </Button>
+                    </div>
+
+                    {hasMarkdown(item.description) && (
+                        <div className="mt-2 rounded-md bg-muted px-3 py-2 text-sm">
+                            <div className="prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.description}</ReactMarkdown>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                        <div className="space-y-1">
+                            <Label className="text-xs text-muted-foreground">Month</Label>
+                            <Input
+                                value={item.month}
+                                onChange={(e) => updateItem(index, { month: e.target.value })}
+                                placeholder="-"
+                            />
+                        </div>
+                        <div className="space-y-1">
+                            <Label className="text-xs text-muted-foreground">Subtotal</Label>
+                            <Input
+                                type="number"
+                                value={item.amount}
+                                onChange={(e) => updateItem(index, { amount: Number(e.target.value) })}
+                            />
+                        </div>
+                    </div>
                 </div>
             ))}
             <Button type="button" variant="outline" size="sm" onClick={addItem}>
