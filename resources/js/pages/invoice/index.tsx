@@ -16,6 +16,7 @@ import { ArrowUpDown, ColumnsIcon, Download, SearchIcon } from 'lucide-react';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
 import { RowActionsMenu } from '@/components/app/row-actions-menu';
+import { StatusBadge } from '@/components/app/status-badge';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -32,6 +33,8 @@ interface InvoiceRow {
     number: string;
     client_name: string;
     issue_date: string;
+    due_date: string | null;
+    status: 'unpaid' | 'paid';
     total: string;
 }
 
@@ -90,6 +93,14 @@ const columns: ColumnDef<InvoiceRow>[] = [
             <div className="text-right font-mono">{formatRupiah(Number(row.getValue<string>('total')))}</div>
         ),
         sortingFn: (a, b) => Number(a.original.total) - Number(b.original.total),
+    },
+    {
+        accessorKey: 'status',
+        header: 'Status',
+        cell: ({ row }) => {
+            const status = row.getValue<'unpaid' | 'paid'>('status');
+            return <StatusBadge tone={status === 'paid' ? 'success' : 'neutral'}>{status === 'paid' ? 'Lunas' : 'Belum Bayar'}</StatusBadge>;
+        },
     },
     {
         id: 'actions',

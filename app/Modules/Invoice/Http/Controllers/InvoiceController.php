@@ -43,6 +43,8 @@ class InvoiceController extends Controller
             'client_id' => $client->id,
             'client_name' => $client->name,
             'issue_date' => $issueDate,
+            'due_date' => $request->validated('due_date'),
+            'notes' => $request->validated('notes'),
             'total' => collect($items)->sum('amount'),
             'content' => ['items' => $items],
             'created_by' => $request->user()->id,
@@ -66,6 +68,9 @@ class InvoiceController extends Controller
         $invoice->update([
             'client_id' => $request->validated('client_id'),
             'issue_date' => $request->date('issue_date'),
+            'due_date' => $request->validated('due_date'),
+            'status' => $request->validated('status') ?? $invoice->status,
+            'notes' => $request->validated('notes'),
             'total' => collect($items)->sum('amount'),
             'content' => ['items' => $items],
         ]);

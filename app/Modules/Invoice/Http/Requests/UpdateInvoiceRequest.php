@@ -16,6 +16,9 @@ class UpdateInvoiceRequest extends FormRequest
         return [
             'client_id' => ['required', 'exists:clients,id'],
             'issue_date' => ['required', 'date'],
+            'due_date' => ['nullable', 'date'],
+            'status' => ['nullable', 'in:unpaid,paid'],
+            'notes' => ['nullable', 'string', 'max:2000'],
             'items' => ['required', 'array', 'min:1'],
             'items.*.description' => ['required', 'string', 'max:2000'],
             'items.*.month' => ['nullable', 'string', 'max:100'],

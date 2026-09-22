@@ -64,6 +64,12 @@
                     <td class="label">Invoice Date</td>
                     <td>{{ \Carbon\Carbon::parse($invoice->issue_date)->translatedFormat('d F Y') }}</td>
                 </tr>
+                @if ($invoice->due_date)
+                    <tr>
+                        <td class="label">Due Date</td>
+                        <td>{{ \Carbon\Carbon::parse($invoice->due_date)->translatedFormat('d F Y') }}</td>
+                    </tr>
+                @endif
             </table>
         </div>
         <div class="right bill-to">
@@ -97,6 +103,13 @@
             </tr>
         </tbody>
     </table>
+
+    @if ($invoice->notes)
+        <div class="notes">
+            <p class="payment-title">Notes</p>
+            <p>{{ $invoice->notes }}</p>
+        </div>
+    @endif
 
     <div class="payment">
         <p class="payment-title">Payment Information</p>

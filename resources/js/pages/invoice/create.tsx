@@ -4,6 +4,7 @@ import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,10 +21,14 @@ export default function CreateInvoice({ clients }: { clients: ClientOption[] }) 
     const { data, setData, post, processing, errors } = useForm<{
         client_id: number;
         issue_date: string;
+        due_date: string;
+        notes: string;
         items: InvoiceItem[];
     }>({
         client_id: clients[0]?.id ?? 0,
         issue_date: new Date().toISOString().slice(0, 10),
+        due_date: '',
+        notes: '',
         items: [{ description: '', month: defaultMonth, amount: 0 }],
     });
 
@@ -65,6 +70,25 @@ export default function CreateInvoice({ clients }: { clients: ClientOption[] }) 
                                     onChange={(e) => setData('issue_date', e.target.value)}
                                 />
                             </div>
+                            <div className="space-y-2">
+                                <Label>Jatuh Tempo</Label>
+                                <Input
+                                    type="date"
+                                    value={data.due_date}
+                                    onChange={(e) => setData('due_date', e.target.value)}
+                                />
+                                {errors.due_date && <p className="text-sm text-destructive">{errors.due_date}</p>}
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label>Catatan</Label>
+                            <Textarea
+                                value={data.notes}
+                                onChange={(e) => setData('notes', e.target.value)}
+                                rows={2}
+                                placeholder="Opsional"
+                            />
                         </div>
 
                         <InvoiceItemRows

@@ -4,6 +4,7 @@ import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,6 +21,9 @@ interface InvoiceData {
     number: string;
     client_id: number;
     issue_date: string;
+    due_date: string | null;
+    status: 'unpaid' | 'paid';
+    notes: string | null;
     content: { items: InvoiceItem[] };
 }
 
@@ -28,10 +32,16 @@ export default function EditInvoice({ invoice, clients }: { invoice: InvoiceData
     const { data, setData, put, processing, errors } = useForm<{
         client_id: number;
         issue_date: string;
+        due_date: string;
+        status: 'unpaid' | 'paid';
+        notes: string;
         items: InvoiceItem[];
     }>({
         client_id: invoice.client_id,
         issue_date: invoice.issue_date.slice(0, 10),
+        due_date: invoice.due_date?.slice(0, 10) ?? '',
+        status: invoice.status,
+        notes: invoice.notes ?? '',
         items: invoice.content.items,
     });
 
@@ -66,6 +76,19 @@ export default function EditInvoice({ invoice, clients }: { invoice: InvoiceData
                                 {errors.client_id && <p className="text-sm text-destructive">{errors.client_id}</p>}
                             </div>
                             <div className="space-y-2">
+                                <Label>Status</Label>
+                                <Select
+                                    value={data.status}
+                                    onValueChange={(v) => setData('status', v as 'unpaid' | 'paid')}
+                                >
+                                    <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="unpaid">Belum Bayar</SelectItem>
+                                        <SelectItem value="paid">Lunas</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <div className="space-y-2">
                                 <Label>Tanggal</Label>
                                 <Input
                                     type="date"
@@ -73,6 +96,25 @@ export default function EditInvoice({ invoice, clients }: { invoice: InvoiceData
                                     onChange={(e) => setData('issue_date', e.target.value)}
                                 />
                             </div>
+                            <div className="space-y-2">
+                                <Label>Jatuh Tempo</Label>
+                                <Input
+                                    type="date"
+                                    value={data.due_date}
+                                    onChange={(e) => setData('due_date', e.target.value)}
+                                />
+                                {errors.due_date && <p className="text-sm text-destructive">{errors.due_date}</p>}
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label>Catatan</Label>
+                            <Textarea
+                                value={data.notes}
+                                onChange={(e) => setData('notes', e.target.value)}
+                                rows={2}
+                                placeholder="Opsional"
+                            />
                         </div>
 
                         <InvoiceItemRows

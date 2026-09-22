@@ -10,11 +10,12 @@ class Invoice extends Model
 {
     protected $fillable = [
         'number', 'sequence', 'client_id', 'client_name',
-        'issue_date', 'total', 'content', 'created_by',
+        'issue_date', 'due_date', 'total', 'status', 'content', 'notes', 'created_by',
     ];
 
     protected $casts = [
         'issue_date' => 'date',
+        'due_date' => 'date',
         'total' => 'decimal:2',
         'content' => 'array',
     ];
