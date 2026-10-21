@@ -18,7 +18,7 @@
     --brand-orange-500: #e2711d;
     --brand-amber-400: #e8a33d;
 
-    --background: #ffffff;
+    --background: #f6f6fa;
     --foreground: var(--brand-indigo-950);
     --card: #ffffff;
     --card-foreground: var(--brand-indigo-950);
@@ -29,24 +29,25 @@
     --secondary: #edecf7;
     --secondary-foreground: var(--brand-indigo-900);
     --muted: #eeedf6;
-    --muted-foreground: #6b6b85;
+    --muted-foreground: #65637e;
     --accent: var(--brand-orange-500);
     --accent-foreground: #ffffff;
-    --border: #e6e5f2;
-    --input: #e6e5f2;
+    --border: #e3e2f0;
+    --input: #e3e2f0;
     --ring: var(--brand-indigo-600);
     --destructive: oklch(0.577 0.245 27.325);
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+    /* Sidebar terang (gaya referensi Support App): putih, teks gelap, tint lembut saat aktif */
     --sidebar: #ffffff;
-    --sidebar-foreground: #4b4b63;
+    --sidebar-foreground: #45435e;
     --sidebar-primary: var(--brand-indigo-600);
     --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: var(--secondary);
-    --sidebar-accent-foreground: var(--brand-indigo-700);
-    --sidebar-border: var(--border);
+    --sidebar-accent: #f0eff7;
+    --sidebar-accent-foreground: var(--brand-indigo-950);
+    --sidebar-border: #e7e6f0;
     --sidebar-ring: var(--brand-indigo-600);
 }
 

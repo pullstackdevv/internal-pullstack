@@ -31,7 +31,8 @@ export default function CreateUser() {
     return (
         <AppLayout>
             <PageHeader title="Tambah User" />
-            <form onSubmit={submit} className="mt-4 max-w-lg space-y-4">
+            <form onSubmit={submit} className="mt-6 max-w-lg">
+                <div className="space-y-4 rounded-lg border border-border bg-card p-6">
                 <div className="space-y-2">
                     <Label htmlFor="name">Nama</Label>
                     <Input id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
@@ -61,6 +62,7 @@ export default function CreateUser() {
                     <ModuleAccessFields value={data.module_access} onChange={(v) => setData('module_access', v)} />
                 )}
                 <Button type="submit" disabled={processing}>Simpan</Button>
+                </div>
             </form>
         </AppLayout>
     );

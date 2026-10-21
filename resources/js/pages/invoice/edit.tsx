@@ -53,8 +53,8 @@ export default function EditInvoice({ invoice, clients }: { invoice: InvoiceData
     return (
         <AppLayout>
             <PageHeader title={`Edit Invoice`} description={invoice.number} />
-            <form onSubmit={submit} className="mt-4 max-w-3xl">
-                <Card>
+            <form onSubmit={submit} className="mt-6 max-w-3xl">
+                <Card className="shadow-none">
                     <CardHeader>
                         <CardTitle>Detail Invoice</CardTitle>
                     </CardHeader>

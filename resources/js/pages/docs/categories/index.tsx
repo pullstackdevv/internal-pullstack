@@ -34,13 +34,13 @@ export default function DocCategoriesIndex({ categories }: { categories: Categor
     return (
         <AppLayout>
             <PageHeader title="Kategori Dokumentasi" />
-            <form onSubmit={submit} className="mt-4 flex max-w-md gap-2">
+            <form onSubmit={submit} className="mt-6 flex max-w-md gap-2">
                 <Input placeholder="Nama kategori" value={name} onChange={(e) => setName(e.target.value)} />
                 <Button type="submit">Tambah</Button>
             </form>
-            <div className="mt-4 rounded-lg border border-border bg-card">
+            <div className="mt-6 rounded-lg border border-border bg-card">
                 <Table>
-                    <TableHeader>
+                    <TableHeader className="bg-muted/40">
                         <TableRow>
                             <TableHead>Nama</TableHead>
                             <TableHead>Jumlah Dokumen</TableHead>
@@ -51,7 +51,7 @@ export default function DocCategoriesIndex({ categories }: { categories: Categor
                         {categories.map((category) => (
                             <TableRow key={category.id}>
                                 <TableCell className="font-medium">{category.name}</TableCell>
-                                <TableCell className="text-muted-foreground">{category.documents_count}</TableCell>
+                                <TableCell className="font-mono text-sm text-muted-foreground">{category.documents_count}</TableCell>
                                 <TableCell className="text-right">
                                     <AlertDialog>
                                         <AlertDialogTrigger asChild>

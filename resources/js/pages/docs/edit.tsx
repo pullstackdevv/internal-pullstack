@@ -42,7 +42,8 @@ export default function EditDocument({ document, categories }: { document: Docum
     return (
         <AppLayout>
             <PageHeader title={`Edit: ${document.title}`} />
-            <form onSubmit={submit} className="mt-4 space-y-4">
+            <form onSubmit={submit} className="mt-6">
+                <div className="space-y-4 rounded-lg border border-border bg-card p-6">
                 <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                         <Label>Judul</Label>
@@ -82,7 +83,7 @@ export default function EditDocument({ document, categories }: { document: Docum
                         className="font-mono text-sm"
                     />
                 ) : (
-                    <div className="rounded-md border p-4">
+                    <div className="rounded-md border border-border bg-background p-4">
                         <MarkdownContent markdown={data.body_markdown} />
                     </div>
                 )}
@@ -97,6 +98,7 @@ export default function EditDocument({ document, categories }: { document: Docum
                 </div>
 
                 <Button type="submit" disabled={processing}>Simpan</Button>
+                </div>
             </form>
         </AppLayout>
     );

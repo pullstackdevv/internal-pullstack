@@ -17,13 +17,24 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen">
-            <div className="hidden w-1/2 flex-col justify-between bg-(--brand-indigo-900) p-12 text-white lg:flex">
+            <div className="hidden w-1/2 flex-col justify-between bg-(--brand-indigo-950) p-12 text-white lg:flex">
                 <img src="/pullstack.png" alt="Pullstack Dev" className="h-10 w-auto self-start object-contain" />
                 <div>
                     <p className="max-w-sm text-2xl font-medium leading-snug text-white/90">
                         Dokumentasi dan invoice internal, di satu tempat.
                     </p>
                     <p className="mt-3 text-sm text-white/50">Akses dikelola oleh admin — hubungi admin kalau butuh akun.</p>
+                    <div className="mt-10 border-t border-white/10 pt-6 font-mono text-xs leading-6 text-white/50">
+                        <p>
+                            <span className="text-white/30">09:41:07</span> deploy docs-app · vps-sgp-04 · ok
+                        </p>
+                        <p>
+                            <span className="text-white/30">09:41:12</span> healthcheck · 200 · 86ms
+                        </p>
+                        <p>
+                            <span className="text-white/30">09:42:03</span> provisioned vps-sgp-04 · 2 vCPU / 4 GB
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -33,7 +44,7 @@ export default function Login() {
                     <h1 className="text-xl font-semibold tracking-tight text-foreground">Masuk ke akun kamu</h1>
                     <p className="mt-1 text-sm text-muted-foreground">Masukkan email dan password internal kamu.</p>
 
-                    <form onSubmit={submit} className="mt-6 space-y-4">
+                    <form onSubmit={submit} className="mt-8 space-y-5">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
                             <Input

@@ -44,9 +44,9 @@ export default function SettingsIndex({ issuer, payment }: { issuer: Issuer; pay
 
     return (
         <AppLayout>
-            <PageHeader title="Settings" description="Data penerbit dan pembayaran yang tampil di invoice PDF" />
-            <div className="mt-4 grid gap-6 lg:grid-cols-2">
-                <Card>
+            <PageHeader title="Pengaturan" description="Data penerbit dan pembayaran yang tampil di invoice PDF" />
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+                <Card className="shadow-none">
                     <CardHeader>
                         <div className="flex items-center gap-2.5">
                             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">
@@ -93,7 +93,7 @@ export default function SettingsIndex({ issuer, payment }: { issuer: Issuer; pay
                     </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-none">
                     <CardHeader>
                         <div className="flex items-center gap-2.5">
                             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-primary">

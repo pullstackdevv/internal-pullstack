@@ -41,8 +41,8 @@ export default function EditClient({ client }: { client: ClientData }) {
     return (
         <AppLayout>
             <PageHeader title={`Edit ${client.name}`} />
-            <form onSubmit={submit} className="mt-4 max-w-lg">
-                <Card>
+            <form onSubmit={submit} className="mt-6 max-w-lg">
+                <Card className="shadow-none">
                     <CardHeader>
                         <CardTitle>Data Client</CardTitle>
                     </CardHeader>

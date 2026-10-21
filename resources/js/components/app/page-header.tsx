@@ -6,10 +6,10 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, description, action }: PageHeaderProps) {
     return (
-        <div className="flex items-center justify-between border-b pb-4">
+        <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
             <div>
-                <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
-                {description && <p className="text-sm text-muted-foreground">{description}</p>}
+                <h1 className="text-xl font-semibold tracking-tight text-foreground">{title}</h1>
+                {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
             </div>
             {action}
         </div>

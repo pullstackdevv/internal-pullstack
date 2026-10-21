@@ -40,8 +40,8 @@ export default function CreateInvoice({ clients }: { clients: ClientOption[] }) 
     return (
         <AppLayout>
             <PageHeader title="Invoice Baru" />
-            <form onSubmit={submit} className="mt-4 max-w-3xl">
-                <Card>
+            <form onSubmit={submit} className="mt-6 max-w-3xl">
+                <Card className="shadow-none">
                     <CardHeader>
                         <CardTitle>Detail Invoice</CardTitle>
                     </CardHeader>

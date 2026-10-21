@@ -71,7 +71,7 @@ const columns: ColumnDef<InvoiceRow>[] = [
             </Button>
         ),
         cell: ({ row }) => (
-            <span className="text-muted-foreground">{formatIndonesianDate(row.getValue<string>('issue_date'))}</span>
+            <span className="font-mono text-sm text-muted-foreground">{formatIndonesianDate(row.getValue<string>('issue_date'))}</span>
         ),
         sortingFn: (a, b) => a.original.issue_date.localeCompare(b.original.issue_date),
     },
@@ -99,7 +99,7 @@ const columns: ColumnDef<InvoiceRow>[] = [
         header: 'Status',
         cell: ({ row }) => {
             const status = row.getValue<'unpaid' | 'paid'>('status');
-            return <StatusBadge tone={status === 'paid' ? 'success' : 'neutral'}>{status === 'paid' ? 'Lunas' : 'Belum Bayar'}</StatusBadge>;
+            return <StatusBadge tone={status === 'paid' ? 'success' : 'warning'}>{status === 'paid' ? 'Lunas' : 'Belum Bayar'}</StatusBadge>;
         },
     },
     {
@@ -158,20 +158,26 @@ export default function InvoicesIndex({ invoices }: { invoices: InvoiceRow[] }) 
                 }
             />
 
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-lg border border-border bg-card p-4">
-                    <p className="text-sm text-muted-foreground">Jumlah Invoice</p>
-                    <p className="mt-1 font-mono text-2xl font-semibold text-foreground">{invoices.length}</p>
+            <div className="mt-6 flex flex-col divide-y divide-border rounded-xl border border-border bg-card sm:flex-row sm:divide-x sm:divide-y-0">
+                <div className="flex-1 px-6 py-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        Jumlah invoice
+                    </p>
+                    <p className="mt-1.5 text-[28px] font-bold leading-none text-foreground">{invoices.length}</p>
+                    <p className="mt-2 text-[13px] text-muted-foreground">Semua invoice yang tercatat</p>
                 </div>
-                <div className="rounded-lg border border-border bg-card p-4">
-                    <p className="text-sm text-muted-foreground">Total Nilai</p>
-                    <p className="mt-1 font-mono text-2xl font-semibold text-foreground">
+                <div className="flex-1 px-6 py-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        Total nilai
+                    </p>
+                    <p className="mt-1.5 text-[28px] font-bold leading-none text-green-600">
                         Rp {formatRupiah(invoices.reduce((sum, invoice) => sum + Number(invoice.total), 0))}
                     </p>
+                    <p className="mt-2 text-[13px] text-muted-foreground">Akumulasi semua invoice</p>
                 </div>
             </div>
 
-            <div className="mt-4 overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+            <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card">
                 <div className="flex items-center gap-2 border-b border-border p-3">
                     <InputGroup className="max-w-xs">
                         <InputGroupInput

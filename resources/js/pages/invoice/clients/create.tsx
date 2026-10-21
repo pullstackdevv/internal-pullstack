@@ -28,8 +28,8 @@ export default function CreateClient() {
     return (
         <AppLayout>
             <PageHeader title="Tambah Client" />
-            <form onSubmit={submit} className="mt-4 max-w-lg">
-                <Card>
+            <form onSubmit={submit} className="mt-6 max-w-lg">
+                <Card className="shadow-none">
                     <CardHeader>
                         <CardTitle>Data Client</CardTitle>
                     </CardHeader>

@@ -19,9 +19,9 @@ export default function ClientsIndex({ clients }: { clients: ClientRow[] }) {
                 title="Client"
                 action={<Button asChild><Link href="/clients/create">Tambah Client</Link></Button>}
             />
-            <div className="mt-4 rounded-lg border border-border bg-card">
+            <div className="mt-6 rounded-lg border border-border bg-card">
                 <Table>
-                    <TableHeader>
+                    <TableHeader className="bg-muted/40">
                         <TableRow>
                             <TableHead>Nama</TableHead>
                             <TableHead>Email</TableHead>
