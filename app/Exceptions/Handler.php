@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -25,6 +27,17 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        // API consumers (MCP server, curl, other agents) do not always send
+        // `Accept: application/json`. Without this, an unauthenticated API
+        // request would be redirected to the web login page (302 HTML)
+        // instead of receiving the contracted 401 JSON response. Web
+        // requests keep the default redirect-to-login behavior.
+        $this->renderable(function (AuthenticationException $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json(['message' => 'Unauthenticated.'], 401);
+            }
         });
     }
 }

@@ -3,13 +3,14 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
 export interface ModuleAccessEntry {
-    module: 'docs' | 'invoice';
+    module: 'docs' | 'invoice' | 'money';
     level: 'view' | 'manage';
 }
 
 const MODULES: Array<{ key: ModuleAccessEntry['module']; label: string }> = [
     { key: 'docs', label: 'Dokumentasi' },
     { key: 'invoice', label: 'Invoice' },
+    { key: 'money', label: 'Keuangan' },
 ];
 
 interface Props {

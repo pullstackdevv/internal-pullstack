@@ -19,7 +19,7 @@ class StoreUserRequest extends FormRequest
             'password' => ['required', 'string', 'min:8'],
             'role' => ['required', 'in:admin,staff'],
             'module_access' => ['array'],
-            'module_access.*.module' => ['required_with:module_access', 'in:docs,invoice'],
+            'module_access.*.module' => ['required_with:module_access', 'in:docs,invoice,money'],
             'module_access.*.level' => ['required_with:module_access', 'in:view,manage'],
         ];
     }

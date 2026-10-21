@@ -21,7 +21,7 @@ class UpdateUserRequest extends FormRequest
             'role' => ['required', 'in:admin,staff'],
             'is_active' => ['required', 'boolean'],
             'module_access' => ['array'],
-            'module_access.*.module' => ['required_with:module_access', 'in:docs,invoice'],
+            'module_access.*.module' => ['required_with:module_access', 'in:docs,invoice,money'],
             'module_access.*.level' => ['required_with:module_access', 'in:view,manage'],
         ];
     }

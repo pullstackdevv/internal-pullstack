@@ -93,3 +93,20 @@
         @apply bg-background text-foreground font-sans antialiased;
     }
 }
+
+/* Print: only the element marked .print-area is visible (used by the money
+   report sheet) — sidebar, topbar and buttons stay off the paper. */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .print-area,
+    .print-area * {
+        visibility: visible;
+    }
+    .print-area {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+    }
+}

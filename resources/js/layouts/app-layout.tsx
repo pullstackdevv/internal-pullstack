@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Clock, FileText, Users, Settings, LayoutDashboard, LucideIcon } from 'lucide-react';
+import { BookOpen, Clock, FileText, Users, Settings, LayoutDashboard, Wallet, LucideIcon } from 'lucide-react';
 import type { SharedProps } from '@/types';
 import { NavUser } from '@/components/app/nav-user';
 import { Toaster } from '@/components/ui/sonner';
@@ -23,6 +23,7 @@ const ICONS: Record<string, LucideIcon> = {
     'file-text': FileText,
     users: Users,
     settings: Settings,
+    wallet: Wallet,
 };
 
 const SECTION_LABELS: Array<[string, string]> = [
@@ -31,6 +32,7 @@ const SECTION_LABELS: Array<[string, string]> = [
     ['/doc-categories', 'Dokumentasi'],
     ['/invoices', 'Invoice'],
     ['/clients', 'Client'],
+    ['/money', 'Keuangan'],
     ['/users', 'Pengguna'],
     ['/settings', 'Pengaturan'],
 ];

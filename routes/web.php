@@ -17,3 +17,4 @@ require __DIR__.'/modules/users.php';
 require __DIR__.'/modules/settings.php';
 require __DIR__.'/modules/docs.php';
 require __DIR__.'/modules/invoice.php';
+require __DIR__.'/modules/money.php';

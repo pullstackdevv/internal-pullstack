@@ -14,6 +14,7 @@ class ModuleRegistry
         return [
             ['key' => 'docs', 'label' => 'Dokumentasi', 'href' => '/docs', 'icon' => 'book-open'],
             ['key' => 'invoice', 'label' => 'Invoice', 'href' => '/invoices', 'icon' => 'file-text'],
+            ['key' => 'money', 'label' => 'Keuangan', 'href' => '/money', 'icon' => 'wallet'],
             ['key' => 'users', 'label' => 'Users', 'href' => '/users', 'icon' => 'users', 'adminOnly' => true],
             ['key' => 'settings', 'label' => 'Settings', 'href' => '/settings', 'icon' => 'settings', 'adminOnly' => true],
         ];
