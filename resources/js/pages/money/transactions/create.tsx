@@ -1,6 +1,5 @@
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import {
     MoneyTransactionForm,
     type CategoryOption,
@@ -18,7 +17,6 @@ export default function CreateMoneyTransaction({ wallets, categories, invoices }
     return (
         <AppLayout>
             <PageHeader title="Transaksi Baru" />
-            <MoneyNav />
             <MoneyTransactionForm
                 wallets={wallets}
                 categories={categories}

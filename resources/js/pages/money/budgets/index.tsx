@@ -3,7 +3,6 @@ import { router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -114,7 +113,6 @@ export default function MoneyBudgetsIndex({ month, categories, recurring, wallet
     return (
         <AppLayout>
             <PageHeader title="Anggaran" description="Batas pengeluaran per kategori, per bulan." />
-            <MoneyNav />
 
             <div className="mt-6 flex items-end gap-3">
                 <div className="space-y-1.5">

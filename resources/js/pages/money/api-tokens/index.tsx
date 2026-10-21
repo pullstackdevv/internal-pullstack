@@ -3,7 +3,6 @@ import { router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -74,7 +73,6 @@ export default function MoneyApiTokensIndex({ tokens, availableAbilities, plainT
                 title="Token MCP"
                 description="Token untuk agent AI yang mengelola keuangan lewat MCP server. Permission token = scope yang dipilih di sini."
             />
-            <MoneyNav />
 
             {plainToken && (
                 <div className="mt-6 rounded-xl border border-green-200 bg-green-50 px-5 py-4">

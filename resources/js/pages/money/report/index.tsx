@@ -3,7 +3,6 @@ import { router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -121,7 +120,6 @@ export default function MoneyReportIndex({ month, companyName, summary, transact
     return (
         <AppLayout>
             <PageHeader title="Laporan Bulanan" description="Sheet keuangan siap cetak, ekspor, dan kirim ke Google Sheets." />
-            <MoneyNav />
 
             <div className="mt-6 flex flex-wrap items-end gap-3 print:hidden">
                 <div className="space-y-1.5">

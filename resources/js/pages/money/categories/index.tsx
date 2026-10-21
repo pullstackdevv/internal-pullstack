@@ -3,7 +3,6 @@ import { router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import { StatusBadge } from '@/components/app/status-badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -76,7 +75,6 @@ export default function MoneyCategoriesIndex({ categories }: { categories: Categ
     return (
         <AppLayout>
             <PageHeader title="Kategori Keuangan" description="Kelompokkan pemasukan dan pengeluaran." />
-            <MoneyNav />
 
             <form onSubmit={submit} className="mt-6 flex max-w-2xl flex-wrap items-end gap-2">
                 <div className="min-w-48 flex-1 space-y-1.5">

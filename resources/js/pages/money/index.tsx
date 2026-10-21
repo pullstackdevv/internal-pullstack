@@ -1,7 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { formatIndonesianDate, formatRupiah } from '@/lib/format';
@@ -93,7 +92,6 @@ export default function MoneyDashboard({
                     </div>
                 }
             />
-            <MoneyNav />
 
             <div className="mt-6 flex flex-col divide-y divide-border rounded-xl border border-border bg-card sm:flex-row sm:divide-x sm:divide-y-0">
                 <StatCell label="Saldo total" value={`Rp ${formatRupiah(totalBalance)}`} sub="Semua dompet" valueClass="text-foreground" />

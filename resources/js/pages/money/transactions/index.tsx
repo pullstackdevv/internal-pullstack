@@ -13,7 +13,6 @@ import { SearchIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { AppLayout } from '@/layouts/app-layout';
 import { PageHeader } from '@/components/app/page-header';
-import { MoneyNav } from '@/components/app/money-nav';
 import { RowActionsMenu } from '@/components/app/row-actions-menu';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -197,7 +196,6 @@ export default function MoneyTransactionsIndex({ transactions, wallets, categori
                     </Button>
                 }
             />
-            <MoneyNav />
 
             <form onSubmit={quickAdd} className="mt-6 rounded-xl border border-border bg-card px-5 py-4">
                 <div className="flex flex-wrap items-end gap-3">
